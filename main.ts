@@ -42,6 +42,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Premio, function (sprite, otherS
     console.log("tiempo empleado: " + Math.round(game.runtime() / 1000) + " seg")
     game.showLongText("tiempo empleado: " + Math.round(game.runtime() / 1000) + " seg", DialogLayout.Bottom)
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.vehicle.roadVertical, function (sprite, location) {
+    if (ayuda == "S") {
+        tiles.setTileAt(location, myTiles.tile2)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.vehicle.roadHorizontal, function (sprite, location) {
+    if (ayuda == "S") {
+        tiles.setTileAt(location, myTiles.tile3)
+    }
+})
 function Fondos () {
     color = randint(1, 16)
     if (color == 1) {
@@ -79,7 +89,9 @@ function Fondos () {
     }
 }
 let color = 0
+let ayuda = ""
 game.splash("Laberinto 20x20", "Autor: Claudio Orts")
+ayuda = game.askForString("Quieres ayuda? S=si, N=no", 1)
 let yo = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . 6 6 6 6 . . . . . . 
